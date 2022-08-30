@@ -1,4 +1,6 @@
-import Email from "./Email";
-import Password from "./Password";
+import EmailInput from "./EmailInput";
+import PasswordInput from "./PasswordInput";
+import Label from './Label';
+import TextInput from "./TextInput";
 
-export {Email, Password}
+export {EmailInput, PasswordInput, Label, TextInput}
