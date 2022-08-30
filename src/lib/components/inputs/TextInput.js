@@ -24,7 +24,7 @@ const TextInput = (props) => {
 
     return (
         <div className="form-group">
-            <div className="input-box">
+            <div className="input-box" style={{transform: 'scale('+props.size+')'}}>
                 <input type={props.inputType}
                        onFocus={() => setColor(props.errorColor)}
                        onBlur={() => {
@@ -37,7 +37,9 @@ const TextInput = (props) => {
                        style={{color: props.textInputColor, borderBottomColor: color}}
                        required
                 />
-                <label style={{color: color}}>{props.textLabel}</label>
+                <label style={{
+                    color: color
+                }}>{props.textLabel}</label>
             </div>
         </div>
     );
@@ -54,17 +56,19 @@ TextInput.propTypes = {
     inputType: PropTypes.oneOf(['number','text','password']),
     minLength: PropTypes.number,
     maxlength: PropTypes.number,
+    size: PropTypes.oneOf([1,2,3]),
 }
 
 TextInput.defaultProps = {
-    textInputColor: 'white',
-    labelColor: 'white',
+    textInputColor: 'black',
+    labelColor: 'black',
     errorColor: 'red',
     successColor: 'green',
     regexValidation: /\w+/,
     inputType: 'text',
     minLength: 0,
     maxlength: 255,
+    size: 1,
 }
 
 export default TextInput;

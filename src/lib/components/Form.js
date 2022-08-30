@@ -1,20 +1,19 @@
 import React, {Children} from 'react';
 import PropTypes from "prop-types";
 import './Form.css'
-import {EmailInput, Label, PasswordInput, TextInput} from "./inputs";
+import {EmailInput, PasswordInput, TextInput} from "./inputs";
+import {SubmitButton, Label, Wrapper} from "./util";
 
 const validChildren = [
-    EmailInput, PasswordInput, TextInput, Label,
+    EmailInput, PasswordInput, TextInput, Label, SubmitButton, Wrapper
 ]
 
 const Form = (props) => {
 
-    const submitData = () => {
-        console.log(props.submitMessage)
-    }
-
     return (
-        <div className='form-container' style={{
+        <div className='form-container'
+             id={props.boxShadow && 'box-shadow'}
+             style={{
             backgroundColor: props.containerColor,
             width: props.containerSize.width,
             height: props.containerSize.height,
@@ -24,15 +23,6 @@ const Form = (props) => {
                     if (validChildren.includes(child.type)) return child
                     else throw Error('Not valid children!')
                 })
-            }
-            {
-                props.hasSubmitButton &&
-                <div
-                    className='form-button'
-                    style={{backgroundColor:'red', flex: 1}}
-                    onClick={submitData}>
-                    {props.submitMessage}
-                </div>
             }
         </div>
     );
@@ -44,8 +34,7 @@ Form.propTypes = {
         width: PropTypes.string.isRequired,
         height: PropTypes.string.isRequired
     }),
-    hasSubmitButton: PropTypes.bool,
-    submitMessage: PropTypes.string,
+    boxShadow: PropTypes.bool,
 }
 
 Form.defaultProps = {
@@ -53,8 +42,7 @@ Form.defaultProps = {
         width: '50%',
         height: '75vh'
     },
-    hasSubmitButton: true,
-    submitMessage: 'Submit',
+    boxShadow: true,
 }
 
 export default Form;

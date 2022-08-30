@@ -1,70 +1,134 @@
-# Getting Started with Create React App
+# React-Effortless-Form
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Create an effortless, styled form in a few lines!
 
-## Available Scripts
+Live demos in progress, coming soon...
 
-In the project directory, you can run:
+Features include:
 
-### `npm start`
+- Easy inputs
+- Create a styled form container
+- Labels, Button and Wrappers
+- More inputs coming soon!
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Installation and Usage
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+The easiest way to install is with npm
+```
+npm i react-effortless-form
+```
 
-### `npm test`
+#### With React Hooks
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```jsx
+import {Form, EmailInput, Wrapper, Label, PasswordInput, SubmitButton} from 'react-effortless-form';
+import {useState} from "react";
 
-### `npm run build`
+const App = () => {
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+    return (
+        <div
+            style={{
+                backgroundImage: 'url(https://wallpaperaccess.com/full/6854780.jpg)',
+                backgroundSize: '50%',
+                width: '100vw',
+                height: '100vh',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center'
+            }}
+        >
+            <Form
+            >
+                <Label
+                    style={{
+                        fontSize: 50,
+                        fontWeight: 'bold',
+                    }}
+                >
+                    Login
+                </Label>
+                <Wrapper>
+                    <EmailInput
+                        onChange={(val) => setEmail(val)}
+                        size={2}
+                    />
+                    <PasswordInput
+                        onChamge={(val) => setPassword(val)}
+                        size={2}
+                    />
+                </Wrapper>
+                <SubmitButton
+                    style={{width: '300px', textAlign: 'center'}}
+                    submitMessage='Log In'
+                    onSubmit={() => console.log({email: email, password: password})}
+                />
+            </Form>
+        </div>
+    );
+}
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+export default App;
+```
 
-### `npm run eject`
+<a href="https://ibb.co/sjZ6K6j"><img src="https://i.ibb.co/WnLPkPn/Screenshot-from-2022-08-30-16-50-20.png" alt="Screenshot-from-2022-08-30-16-50-20" border="0"></a>
+## Props
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Form
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+| **Prop**       | **Type**                               | **Default**               | **isRequired** | **Description**                                        |
+|----------------|----------------------------------------|---------------------------|----------------|--------------------------------------------------------|
+| containerColor | color                                  | 'white'                   | no             | Given a form a container is created with a plain color |
+| containerSize  | object (width: string, height: string) | width:'50%' height: '75%' | no             | Sets the size for the form container                   |
+| boxShadow      | bool                                   | true                      | no             | Whether there is a shadow below the container or not   |
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### TextInput
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+| **Prop**        | **Type**                 | **Default** | **isRequired** | **Description**                                            |
+|-----------------|--------------------------|-------------|----------------|------------------------------------------------------------|
+| textLabel       | string                   | -           | yes            | Sets the label for the input (username, fullname, etc.)    |
+| labelColor      | color                    | 'white'     | no             | Sets the color for the label when not selected             |
+| textInputColor  | color                    | 'white'     | no             | Sets the color for the input text and the cursor           |
+| errorColor      | color                    | 'red'       | no             | Sets the color for when the field is not valid             |
+| successColor    | color                    | 'green'     | no             | Sets the color for when the field is valid                 |
+| onChange        | function                 | -           | yes            | The function to set what happens when the input is changed |
+| regexValidation | regex                    | /\w+/       | no             | Regex to validate field and change color                   |
+| inputType       | ['number','text','password'] | 'text'      | no             | Sets the input type for keyboard and how it is shown       |
+| minLength       | number                   | 0           | no             | Minimum length required for the field for validation       |
+| maxLength       | number                   | 255         | no             | Maximum length required for the field for validation       |
+| size            | [1,2,3]                  | 1           | no             | Sets the input size                                        |
 
-## Learn More
+### EmailInput
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+It contains the same props as TextInput except the regexValidation is for email validation
+and `textLabel` is now called `emailLabel`, it is not required and the default value is `'Email'`
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### PasswordInput
 
-### Code Splitting
+It contains the same props as TextInput except the `inputType` is `'password'` and
+the `textLabel` is now `passwordLabel`, it is not required, and the default value is `'Password'`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### SubmitButton
 
-### Analyzing the Bundle Size
+| **Prop**              | **Type** | **Default**           | **isRequired** | **Description**                             |
+|-----------------------|----------|-----------------------|----------------|---------------------------------------------|
+| submitText            | string   | 'Submit'              | no             | The text for the button                     |
+| submitButtonColor     | color    | 'black'               | no             | The background color of the button          |
+| submitButtonTextColor | color    | 'white'               | no             | The color of the button text                |
+| className             | string   | 'submit-button-class' | no             | Sets the classname for styling the button   |
+| style                 | object   | {}                    | no             | Styling the button with inline react styles |
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Label
 
-### Making a Progressive Web App
+| **Prop**        | **Type** | **Default** | **isRequired** | **Description**                            |
+|-----------------|----------|-------------|----------------|--------------------------------------------|
+| submitTextvlaue | string   | ''          | no             | The text for the label                     |
+| className       | string   | ''          | no             | Sets the classname for styling the label   |
+| style           | object   | {}          | no             | Styling the label with inline react styles |
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## License
 
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+MIT Licensed. Copyright (c) 2022 Federico Pochat
