@@ -3,8 +3,8 @@
   "description": "Create an effortless, styled form in a few lines!",
   "author": "F-Pochat",
   "keywords": ["react","components","ui","forms","easy","effortless","form"],
-  "version": "0.3.0",
-  "license": "MIT License",
+  "version": "0.3.1",
+  "license": "MIT",
   "private": false,
   "main": "dist/index.js",
   "module": "dist/index.js",
@@ -17,8 +17,7 @@
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-icons": "^4.4.0",
-    "react-scripts": "5.0.1"
+    "react-icons": "^4.4.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -47,6 +46,7 @@
   "devDependencies": {
     "@babel/cli": "^7.18.10",
     "@babel/core": "^7.18.13",
-    "@babel/preset-env": "^7.18.10"
+    "@babel/preset-env": "^7.18.10",
+    "react-scripts": "5.0.1"
   }
 }
